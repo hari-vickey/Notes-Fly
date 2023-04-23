@@ -1,33 +1,32 @@
 import React, { useState } from "react";
 
 function InputNote(props) {
-  const [inputTitle, setInputTitle] = useState("");
-  const [inputContent, setInputContent] = useState("");
+  const [note, setNote] = useState({title: '', content: ''});
 
-  function handleTitleChange(event) {
-    let value = event.target.value;
-    setInputTitle(value);
+  function handleChange(event) {
+    const {name, value} = event.target;
+    setNote(prevNote => {
+      return {
+        ...prevNote, [name]: value
+      };
+    });
   }
 
-  function handleContentChange(event) {
-    setInputContent(event.target.value);
-  }
-
-  function submitNote() {
-    let note = {
-      title: inputTitle,
-      content: inputContent
-    }
+  function submitNote(event) {
     props.onAdd(note);
-    setInputTitle("");
-    setInputContent("");
+    event.preventDefault();
+    setNote("");
   }
 
   return (
     <div className="note form spacing">
-      <input onChange={handleTitleChange} type="text" placeholder="Add title" value={inputTitle}/>
-      <textarea onChange={handleContentChange} type="text" placeholder="Add content.." value={inputContent}/>
-      <button className="note-button" onClick={submitNote} type="button"><p>+</p></button>
+      <input name="title" value={note.title}
+        onChange={handleChange} type="text" placeholder="Add title"/>
+      <textarea name="content" value={note.content}
+        onChange={handleChange} type="text" placeholder="Add content.."/>
+      <button type="button" className="note-button"
+        onClick={submitNote}><p>+</p>
+      </button>
     </div>
   );
 }

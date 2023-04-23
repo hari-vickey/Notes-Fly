@@ -33,10 +33,6 @@ nav, footer, button, span, .todo-list {
   width: 100%;
 }
 
-footer {
-  padding: 10px;
-}
-
 .navbar-brand, .nav-link {
   color: #FFFFFF;
   font-weight: 200;
@@ -52,31 +48,19 @@ footer {
 }
 
 footer {
+  border-radius: 25px 25px 0px 0px;
   justify-content: center;
+  width: fit-content;
   text-align: center;
-  font-size: 20px;
-}
-
-footer p {
-  margin: 10px 0px 0px;
-}
-
-.footer-part{
-  max-width: 300px;
-}
-
-.fa-brands {
-  color: #FFFFFF;
-}
-
-.fa-brands:hover {
-  color: #000000;
+  font-size: 18px;
+  padding: 10px;
 }
 
 /*Stick Footer*/
 .page {
   justify-content:space-between;
   flex-direction:column;
+  align-items: center;
   min-height: 100vh;
   display:flex;
   width: 100%;

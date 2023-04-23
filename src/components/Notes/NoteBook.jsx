@@ -25,7 +25,7 @@ function NoteBook() {
     <div className="note-book">
       <InputNote onAdd={addNote}/>
       {notes.map((note, index) =>
-      <Note id={index} key={index} heading={note.title} content={note.content} onRemove={deleteNote} />
+        <Note id={index} key={index} heading={note.title} content={note.content} onRemove={deleteNote} />
       )}
     </div>
   );
