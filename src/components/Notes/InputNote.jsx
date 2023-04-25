@@ -15,7 +15,7 @@ function InputNote(props) {
   function submitNote(event) {
     props.onAdd(note);
     event.preventDefault();
-    setNote("");
+    setNote({title: '', content: ''});
   }
 
   return (

@@ -8,7 +8,7 @@ function Header() {
         <a className="navbar-brand" href="/">Notes Fly</a>
         <ul className="navbar-nav ms-auto">
           <li className="nav-item"><a className="nav-link" href="/">Help</a></li>
-          <li className="nav-item"><a className="nav-link" href="/">Login</a></li>
+          <li className="nav-item"><a className="nav-link" href="/login">Login</a></li>
           </ul>
       </div>
     </nav>

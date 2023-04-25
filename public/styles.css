@@ -1,6 +1,7 @@
 body {
   font-family: "Montserrat", sans-serif;
   background-color: #ffeaa7;
+  background-image: url("https://transparenttextures.com/patterns/checkered-pattern.png");
 }
 
 nav, footer, button, span, .todo-list {
