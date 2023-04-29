@@ -1,0 +1,69 @@
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+}
+
+.error {
+  margin: 30px;
+  height: 100vh;
+}
+
+.login-form {
+  font-family: "Architects Daughter", cursive;
+  text-align: center;
+  max-width: 330px;
+  padding: 12px;
+}
+
+.app-heading {
+  font-size: 30px;
+  padding: 7px;
+}
+
+.login-form .form-floating:focus-within {
+  z-index: 2;
+}
+
+.top {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.middle {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+
+.bottom {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.auth-btn {
+  margin: 0px;
+  transition: all 0.2s ease-in-out;
+}
+
+.auth-btn:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(0.9);
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 5px;
+}
+.separator p {
+  margin: 0px 5px;
+}
+.separator::before, .separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 3px solid #FFFFFF;
+}
