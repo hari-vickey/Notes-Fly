@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Item(props) {
+export default function Item(props) {
   function handleChange(event) {
     props.onChecked(props.id);
   }
@@ -12,5 +12,3 @@ function Item(props) {
     </div>
   )
 }
-
-export default Item;

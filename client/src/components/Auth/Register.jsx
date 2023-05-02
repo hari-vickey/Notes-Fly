@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import './auth.css';
 
-function Register() {
+export default function Register() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({username: '', mail: '', password: ''});
+  const [user, setUser] = useState({fName: '', lName: '', mail: '', password: ''});
 
   function handleChange(event) {
     const {name, value} = event.target;
@@ -18,28 +18,21 @@ function Register() {
 
   function submitForm(e) {
     e.preventDefault();
-    Axios.post('http://localhost:8000/api/auth', user)
+    Axios.post('http://localhost:8000/api/auth/register', user)
     .then((res) => {
       console.log(res.data.message);
-      navigate('/home', {state: {data: user.username}});
-      setUser({username: '', mail: '', password: ''});
+      // navigate('/app', {state: {data: user.fName}});
+      setUser({fName: '', lName: '', mail: '', password: ''});
     }).catch((err) => {
       console.log("Error");
       console.log(err.message);
-      navigate('/error');
+      // navigate('/error', {state: {data: '/register'}});
     });
   }
 
-  // function googleAuth(e) {
-  //   console.log(e);
-  //   Axios.get('http://localhost:8000/api/auth/auth/google').then((res) => {
-  //     console.log(res.data.message);
-  //   }).catch((err) => {
-  //     console.log("Error");
-  //     console.log(err.message);
-  //     navigate('/error');
-  //   });
-  // }
+  function googleAuth() {
+    window.open('http://localhost:8000/api/auth/google', '_self');
+  }
 
   return (
     <div className='center'>
@@ -48,12 +41,17 @@ function Register() {
           <img src="images/notes-fly.png" alt="notes-fly" width="100"/>
           <h1 className="app-heading">Notes Fly</h1>
           <div className="form-floating">
-            <input required type="text" name="username" className="top form-control" value={user.username}
-              placeholder="username" onChange={handleChange}/>
-            <label htmlFor="username">Full Name</label>
+            <input required type="text" name="fName" className="top form-control" value={user.fName}
+              placeholder="firstName" onChange={handleChange}/>
+            <label htmlFor="fName">First Name</label>
           </div>
           <div className="form-floating">
-            <input type="email" name="mail" className="middle form-control" value={user.mail}
+            <input required type="text" name="lName" className="middle form-control" value={user.lName}
+              placeholder="lastName" onChange={handleChange}/>
+            <label htmlFor="lName">Last Name</label>
+          </div>
+          <div className="form-floating">
+            <input required type="email" name="mail" className="middle form-control" value={user.mail}
               placeholder="Gmail" onChange={handleChange} />
             <label htmlFor="mail">Gmail</label>
           </div>
@@ -62,16 +60,14 @@ function Register() {
             placeholder="password" onChange={handleChange} />
             <label htmlFor="password">Password</label>
           </div>
-          <button className="w-100 btn btn-lg auth-btn" type="submit">Register</button>
+          <button className="w-100 btn btn-lg auth-btn" type="submit" disabled>Register</button>
         </form>
         <div className="separator"><p>or</p></div>
         <button className="w-100 btn btn-lg auth-btn"
-        onClick={""}>
+        onClick={googleAuth}>
           <i className="fab fa-google"></i> Register using Google
         </button>
       </div>
     </div>
   );
 }
-
-export default Register;

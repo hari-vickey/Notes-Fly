@@ -1,7 +1,7 @@
 import { useState } from 'react';
 // import Axios from 'axios';
 
-function InputItem(props) {
+export default function InputItem(props) {
   const [item, setItem] = useState({task: '', checked: false});
 
   function handleChange(event) {
@@ -40,5 +40,3 @@ function InputItem(props) {
     </div>
   );
 }
-
-export default InputItem;

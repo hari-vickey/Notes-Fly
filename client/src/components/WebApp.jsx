@@ -1,4 +1,3 @@
-import React from 'react';
 import Footer from './Navbar/Footer/Footer';
 import NoteBook from './Notes/NoteBook';
 import Navbar from './Navbar/NavBar';
@@ -13,13 +12,13 @@ const navItems = [
   }
 ]
 
-export default function Home(props) {
+export default function WebApp(props) {
   return (
     <div className='page'>
-      <Navbar title='Hi User!' Links={navItems}/>
+      <Navbar username={props.user} Links={navItems}/>
       <div className='row'>
         <div className='col-auto'>
-          <TodoList items={[]} />
+          <TodoList id={props.mail} items={[]} />
         </div>
         <div className='col'>
           <div className='row'>

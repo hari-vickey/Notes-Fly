@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import './auth.css';
 
-function Login() {
+export default function Login() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({username: '', mail: '', password: ''});
+  const [user, setUser] = useState({mail: '', password: ''});
 
   function handleChange(event) {
     const {name, value} = event.target;
@@ -18,28 +18,21 @@ function Login() {
 
   function submitForm(e) {
     e.preventDefault();
-    Axios.post('http://localhost:8000/api/auth', user)
+    Axios.post('http://localhost:8000/api/auth/login', user)
     .then((res) => {
       console.log(res.data.message);
-      navigate('/home', {state: {data: user.username}});
-      setUser({username: '', mail: '', password: ''});
+      navigate('/app', {state: {data: user.fName}});
+      setUser({mail: '', password: ''});
     }).catch((err) => {
       console.log("Error");
       console.log(err.message);
-      navigate('/error');
+      navigate('/error', {state: {data: '/login'}});
     });
   }
 
-  // function googleAuth(e) {
-  //   console.log(e);
-  //   Axios.get('http://localhost:8000/api/auth/auth/google').then((res) => {
-  //     console.log(res.data.message);
-  //   }).catch((err) => {
-  //     console.log("Error");
-  //     console.log(err.message);
-  //     navigate('/error');
-  //   });
-  // }
+  function googleAuth(e) {
+    window.open('http://localhost:8000/api/auth/google', '_self');
+  }
 
   return (
     <div className='center'>
@@ -57,16 +50,14 @@ function Login() {
             placeholder="password" onChange={handleChange} />
             <label htmlFor="password">Password</label>
           </div>
-          <button className="w-100 btn btn-lg auth-btn" type="submit">Login</button>
+          <button className="w-100 btn btn-lg auth-btn" type="submit" disabled>Login</button>
         </form>
         <div className="separator"><p>or</p></div>
         <button className="w-100 btn btn-lg auth-btn"
-        onClick={""}>
+        onClick={googleAuth}>
           <i className="fab fa-google"></i> Login using Google
         </button>
       </div>
     </div>
   );
 }
-
-export default Login;

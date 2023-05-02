@@ -4,7 +4,7 @@ import InputItem from './InputItem';
 
 var list = [];
 
-function TodoList(props) {
+export default function TodoList(props) {
   const [items, setItems] = useState([]);
   function addItem(inputText) {
     setItems(prevItems => {
@@ -44,5 +44,3 @@ function TodoList(props) {
     </div>
   );
 }
-
-export default TodoList;
