@@ -1,9 +1,7 @@
 import React from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Error() {
-  const location = useLocation();
-  const {data} = location.state;
   const navigate = useNavigate();
   return (
   <div className="error">
@@ -11,7 +9,7 @@ export default function Error() {
     <p className="lead">We ran into a problem. Please try again!</p>
     <div className="btn btn-lg"
     onClick={() => {
-      navigate(data);
+      navigate('/');
     }} >Try Again</div>
   </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function InputNote(props) {
+export default function InputNote(props) {
   const [note, setNote] = useState({title: '', content: ''});
 
   function handleChange(event) {
@@ -30,5 +30,3 @@ function InputNote(props) {
     </div>
   );
 }
-
-export default InputNote;

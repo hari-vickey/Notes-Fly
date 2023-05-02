@@ -67,21 +67,28 @@ nav, footer, button, span, .description, .todo-list {
   color: #f1f5f8
 }
 
+.nav-btn:hover {
+  cursor: pointer;
+}
+
 .btn:hover {
   background-color: #f1f5f8;
   border: solid 2px #ba9cfd;
   color: #ba9cfd;
 }
 
-.login {
-  background-color: #f1f5f8;
-  border: solid 2px transparent;
-  color: #ba9cfd;
+.auth-btn {
+  transition: all 0.20s ease-in-out;
 }
 
-.login:hover {
-  color: #f1f5f8;
-  background-color: #ba9cfd;
+.auth-btn:hover {
+  transition: all 0.25s ease-out;
+  transform: scale(1.05);
+}
+
+.error {
+  margin: 30px;
+  height: 100vh;
 }
 
 .text-center {

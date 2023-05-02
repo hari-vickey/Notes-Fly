@@ -1,21 +1,12 @@
-import Footer from './Navbar/Footer/Footer';
+import Footer from './utils/Footer';
 import NoteBook from './Notes/NoteBook';
-import Navbar from './Navbar/NavBar';
+import Navbar from './utils/NavBar';
 import TodoList from './Todo/List';
 
-const navItems = [
-  {
-    key: 117,
-    class: 'nav-link',
-    ref: '/logout',
-    text: 'Log Out'
-  }
-]
-
-export default function WebApp(props) {
+export default function NotesFly(props) {
   return (
     <div className='page'>
-      <Navbar username={props.user} Links={navItems}/>
+      <Navbar username={props.user}/>
       <div className='row'>
         <div className='col-auto'>
           <TodoList id={props.mail} items={[]} />

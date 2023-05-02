@@ -4,7 +4,7 @@ import InputNote from "./InputNote";
 
 var work = [];
 
-function NoteBook(props) {
+export default function NoteBook(props) {
   const [notes, setNotes] = useState([]);
 
   function addNote(inputNote) {
@@ -40,5 +40,3 @@ function NoteBook(props) {
     </div>
   );
 }
-
-export default NoteBook;

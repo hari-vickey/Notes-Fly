@@ -1,5 +1,4 @@
 import React from 'react';
-import Profile from './Profile';
 
 const Profiles = [
   {
@@ -27,9 +26,15 @@ export default function Footer() {
     <footer>
       <div className='footer-part'>&copy; 2023, Hari Vikinesh.</div>
       <div className='footer-part'>
-        {Profiles.map((item) => <Profile
-          key={item.key} label={item.label} link={item.link} class={item.class}/>)
-        }
+        {Profiles.map((item) => {
+          return (
+            <span key={item.key} className='brands'>
+              <a aria-label={item.label} href={item.link}>
+                <i className={item.class}></i>
+              </a>
+            </span>
+          )
+        })}
       </div>
   </footer>
   );

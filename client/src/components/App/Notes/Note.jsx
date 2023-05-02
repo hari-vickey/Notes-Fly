@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Note(props) {
+export default function Note(props) {
   return (
     <div className='note'>
       <button type="button" className="note-button del" onClick={() => {
@@ -11,5 +11,3 @@ function Note(props) {
     </div>
   );
 }
-
-export default Note;
