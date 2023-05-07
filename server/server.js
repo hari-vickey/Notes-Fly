@@ -1,13 +1,14 @@
 // Use Environment Variables
 require('dotenv').config();
-// Mongoose to handle database
-const mongoose = require('mongoose');
-// Use Express Module
+
+// Import Required Modules
 const session = require('express-session');
 const passport = require('passport');
+const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const app = express();
+
 // use express instead body-parser
 app.use(express.json({ extended: false }));
 // Add public folder to be accessible
@@ -18,7 +19,7 @@ app.use(session({
   resave: false, saveUninitialized: false
 }));
 
-// cors
+// Setup CORS
 app.use(cors({
   origin: "http://localhost:3000",
   methods: "GET, POST, PUT, DELETE",
@@ -30,12 +31,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routes
-const todo = require('./routes/todo');
 const auth = require('./routes/auth');
+const todo = require('./routes/todo');
+const note = require('./routes/note');
 
 // use Routes
-app.use('/api/todo', todo);
 app.use('/api/auth', auth);
+app.use('/api/todo', todo);
+app.use('/api/note', note);
 
 // connect to mongoDB server
 const connectDB = async () => {

@@ -1,27 +1,27 @@
 const User = require('../models/user');
 
-exports.addItem = (req, res) => {
+exports.addNote = (req, res) => {
   User.findOneAndUpdate(req.body.mail)
   .then((foundUser) => {
     if(foundUser) {
-      foundUser.items.push(req.body.item);
+      foundUser.notes.push(req.body.note);
       foundUser.save();
     }
-  }).then(() => res.send('added item'));;
+  }).then(() => res.send('added note'));;
 };
 
-exports.getItems = (req, res) => {
+exports.getNotes = (req, res) => {
   User.findOne({mail: req.body.mail}).then((foundUser) => {
-    if(foundUser) res.send(foundUser.items);
+    if(foundUser) res.send(foundUser.notes);
   })
 }
 
-exports.deleteItem = (req, res) => {
+exports.deleteNote = (req, res) => {
   User.findOneAndUpdate(req.body.mail)
   .then((foundUser) => {
     if(foundUser) {
-      foundUser.items.pull({_id: req.body.item});
+      foundUser.notes.pull({_id: req.body.note});
       foundUser.save();
     }
-  }).then(() => res.send('deleted item'));
+  }).then(() => res.send('deleted note'));
 }

@@ -6,10 +6,9 @@ import NotesFly from './App/NotesFly';
 export default function App() {
   const [user, setUser] = useState(null);
   const [mail, setMail] = useState(null);
-  console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
     function getUser() {
-      fetch('http://localhost:8000/api/auth/validate', {
+      fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
         method:'GET',
         credentials: 'include',
         headers: {
@@ -26,12 +25,12 @@ export default function App() {
       }).catch((err) => { console.log(err) });
     };
     getUser();
-  },[]);
+  }, []);
 
   function GoogleAuth() {
     return (
       <div>
-        {window.open('http://localhost:8000/api/auth/google', '_self')}
+        {window.open(process.env.REACT_APP_AUTH_URL + '/google', '_self')}
       </div>
     )
   }

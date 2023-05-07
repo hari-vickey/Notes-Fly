@@ -1,40 +1,35 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import Axios from 'axios';
 import Note from "./Note";
 import InputNote from "./InputNote";
-
-var work = [];
 
 export default function NoteBook(props) {
   const [notes, setNotes] = useState([]);
 
+  useEffect(() => {
+    function getNotes() {
+      Axios.post(process.env.REACT_APP_NOTE_URL + '/allNotes',
+      { mail: props.id }).then(res => setNotes(res.data));
+    };
+    getNotes();
+  }, [notes, props.id]);
+
   function addNote(inputNote) {
-    setNotes(prevNotes => {
-      return [...prevNotes, inputNote];
-    });
+    Axios.post(process.env.REACT_APP_NOTE_URL + '/addNote',
+    { mail: props.id, note: inputNote })
   }
 
   function deleteNote(id) {
-    setNotes(prevNotes => {
-      return prevNotes.filter((_, index) => {
-        // returns all the element of the array
-        // without the provided index element
-        return index !== id;
-      });
-    });
-  }
-
-  function checkProps(array) {
-    if (array.length === 0) { work = notes }
-    else { work = array }
+    Axios.post(process.env.REACT_APP_NOTE_URL + '/deleteNote',
+    { mail: props.id, item: id })
   }
 
   return (
     <div className='note-book'>
       <InputNote onAdd={addNote}/>
-      {checkProps(props.notes)}
-      {work.map((note, index) =>
-        <Note id={index} key={note.title + '_' + index}
-          heading={note.title} content={note.content}
+      {notes.map((element) =>
+        <Note id={element._id} key={element._id}
+          heading={element.title} content={element.content}
           onRemove={deleteNote} />
       )}
     </div>

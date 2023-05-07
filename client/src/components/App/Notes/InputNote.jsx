@@ -14,7 +14,6 @@ export default function InputNote(props) {
 
   function submitNote(event) {
     props.onAdd(note);
-    event.preventDefault();
     setNote({title: '', content: ''});
   }
 
@@ -24,8 +23,8 @@ export default function InputNote(props) {
         onChange={handleChange} type='text' placeholder='Add title'/>
       <textarea name='content' value={note.content}
         onChange={handleChange} type='text' placeholder='Add content..'/>
-      <div className='btn note-button'
-        onClick={submitNote}><span>+</span>
+      <div className='btn note-button' onClick={submitNote}>
+        <span>+</span>
       </div>
     </div>
   );

@@ -20,11 +20,7 @@ passport.use(
           googleId: profile.id,
           mail: profile.emails[0].value
         })
-        User.create(user).then((data) => {
-          console.log(data);
-        }).catch((err) => {
-          console.log(err)
-        });
+        User.create(user).catch((err) => console.log(err));
       }
     });
     done(null, profile);

@@ -120,17 +120,15 @@ footer {
 }
 
 .home {
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
   display:flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .page {
-  /* background-image: url("https://transparenttextures.com/patterns/checkered-pattern.png"); */
   justify-content:space-between;
-  /* background-color: #ffeaa7; */
   flex-direction:column;
   align-items: center;
   min-height: 100vh;
@@ -278,16 +276,13 @@ footer {
 }
 
 .note-button {
-  position: relative;
-  float: right;
-}
-
-.note-button {
   transition: all 0.25s ease-in-out;
   justify-content: center;
   align-items: center;
+  position: relative;
   display: flex;
   height: 40px;
+  float: right;
   width: 40px;
 }
 
@@ -301,12 +296,13 @@ footer {
 }
 
 .del {
+  border: solid 2px #ff3838 !important;
+  border-radius: 7px;
   background-color: #ff3838;
   top: -25px;
 }
 
 .del:hover {
-  border: solid 2px #ff3838 !important;
   background-color: #f1f5f8;
   color: #ff3838 !important;
 }
