@@ -23,11 +23,10 @@ app.use(cors({
 const MongoStore = require('connect-mongo');
 app.use(session({
   secret: process.env.SECRET,
-  resave: true, proxy: true,
+  resave: false, proxy: true,
   saveUninitialized: false,
   store: new MongoStore({
     mongoUrl: process.env.MONGO_URI,
-    ttl: 14 * 24 * 60 * 60,
     autoRemove: 'interval'
   }),
   cookie: { sameSite: false }

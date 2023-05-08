@@ -26,12 +26,12 @@ passport.use(
   }
 ));
 
-passport.serializeUser((user,done)=>{
-  done(null,user);
+passport.serializeUser((user, done) => {
+  done(null, user);
 });
 
-passport.deserializeUser((user,done)=>{
-  done(null,user);
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 exports.googleOAuth = passport.authenticate('google', {
@@ -41,7 +41,9 @@ exports.googleOAuth = passport.authenticate('google', {
 exports.googleCallback = passport.authenticate('google', {
   successRedirect: process.env.CLIENT_URL + '/app',
   failureRedirect: process.env.CLIENT_URL + '/error',
-})
+}), (req, res) => {
+  req.session.user = req.user;
+};
 
 exports.isAuthenticated = (req, res) => {
   console.log(req.user);
