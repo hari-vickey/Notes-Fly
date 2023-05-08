@@ -2,13 +2,12 @@ const User = require('../models/user');
 // Passport for Authentication
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const CLIENT_URL = 'http://localhost:3000';
 
 passport.use(
   new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:8000/api/auth/google/notesfly',
+    callbackURL: process.env.GOOGLE_CALLBACK_URL,
     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
   },
   function (accessToken, refreshToken, profile, done) {
@@ -40,8 +39,8 @@ exports.googleOAuth = passport.authenticate('google', {
 });
 
 exports.googleCallback = passport.authenticate('google', {
-  successRedirect: CLIENT_URL + '/app',
-  failureRedirect: CLIENT_URL + '/error',
+  successRedirect: process.env.CLIENT_URL + '/app',
+  failureRedirect: process.env.CLIENT_URL + '/error',
 })
 
 exports.isAuthenticated = (req, res) => {
@@ -60,6 +59,6 @@ exports.isAuthenticated = (req, res) => {
 exports.logoutAccount = (req, res) => {
   req.logout((err) => {
     if (err) { console.log(err); }
-    res.redirect(CLIENT_URL);
+    res.redirect(process.env.CLIENT_URL);
   });
 }
