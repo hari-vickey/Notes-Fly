@@ -44,7 +44,6 @@ exports.googleCallback = passport.authenticate('google', {
 })
 
 exports.isAuthenticated = (req, res) => {
-  console.log(req.user);
   if(req.user) {
     res.send({
       user: req.user.name.givenName,

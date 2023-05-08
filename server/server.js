@@ -13,24 +13,23 @@ const app = express();
 app.use(express.json({ extended: false }));
 // Add public folder to be accessible
 app.use(express.static('public'));
-// Set Parameters for Express Session
-const MongoStore = require('connect-mongo');
-app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true,
-  store: new MongoStore({
-    mongoUrl: process.env.MONGO_URI,
-    ttl: 14 * 24 * 60 * 60,
-    autoRemove: 'interval'
-  })
-}));
-
 // Setup CORS
 app.use(cors({
   origin: process.env.CLIENT_URL,
   methods: "GET, POST, PUT, DELETE",
   credentials: true
+}));
+// Set Parameters for Express Session
+const MongoStore = require('connect-mongo');
+app.use(session({
+  secret: process.env.SECRET,
+  resave: true, proxy: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongoUrl: process.env.MONGO_URI,
+    ttl: 14 * 24 * 60 * 60,
+    autoRemove: 'interval'
+  })
 }));
 
 // Passport Setup
