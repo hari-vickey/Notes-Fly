@@ -12,12 +12,14 @@ export default function App() {
       Axios.get(process.env.REACT_APP_AUTH_URL + '/validate',
       { withCredentials: true })
       .then((res) => {
+        console.log(res);
+        console.log(res.data);
         if(res.data.message === 'success') {
-          console.log('Authentication Successful');
+          console.log(res.data.message);
           setUser(res.data.user);
           setMail(res.data.mail);
         }
-        else console.log('Authentication Failed');
+        else console.log(res.data.message);
       }).catch(err => console.log(err));
     };
     getUser();
