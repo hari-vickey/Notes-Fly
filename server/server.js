@@ -29,7 +29,8 @@ app.use(session({
     mongoUrl: process.env.MONGO_URI,
     ttl: 14 * 24 * 60 * 60,
     autoRemove: 'interval'
-  })
+  }),
+  cookie: { sameSite: false }
 }));
 
 // Passport Setup
