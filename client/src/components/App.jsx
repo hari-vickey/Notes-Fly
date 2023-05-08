@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Axios from 'axios';
 import Home from './Home/Home';
 import NotesFly from './App/NotesFly';
 
@@ -8,24 +9,19 @@ export default function App() {
   const [mail, setMail] = useState(null);
   useEffect(() => {
     function getUser() {
-      fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
-        method:'GET',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Credentials': true,
-        },
-      }).then((response) => {
-        if (response.status === 200) return response.json();
-        throw new Error('authentication has been failed!');
-      }).then((object) => {
-        setUser(object.user);
-        setMail(object.mail);
-      }).catch((err) => { console.log(err) });
+      Axios.get(process.env.REACT_APP_AUTH_URL + '/validate',
+      { withCredentials: true })
+      .then((res) => {
+        if(res.data.message === 'success') {
+          console.log('Authentication Successful');
+          setUser(res.data.user);
+          setMail(res.data.mail);
+        }
+        else console.log('Authentication Failed');
+      }).catch(err => console.log(err));
     };
     getUser();
-  }, []);
+  }, [user]);
 
   function GoogleAuth() {
     return (

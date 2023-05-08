@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
   function logout() {
-    window.open('http://localhost:8000/api/auth/logout', '_self');
+    window.open(process.env.REACT_APP_AUTH_URL + '/logout', '_self');
   }
   return (
     <nav className='navbar navbar-expand my-navbar'>

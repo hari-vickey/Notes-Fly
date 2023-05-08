@@ -45,14 +45,14 @@ exports.googleCallback = passport.authenticate('google', {
 
 exports.isAuthenticated = (req, res) => {
   if(req.user) {
-    res.status(200).json({
+    res.send({
       user: req.user.name.givenName,
       mail: req.user.emails[0].value,
-      message: 'successful'
+      message: 'success'
     });
   }
   else {
-    res.status(401).json({ message: 'failure' });
+    res.send({ message: 'failure' });
   }
 }
 
