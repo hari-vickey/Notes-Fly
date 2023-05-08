@@ -9,21 +9,24 @@ export default function App() {
   const [mail, setMail] = useState(null);
   useEffect(() => {
     function getUser() {
-      Axios.get(process.env.REACT_APP_AUTH_URL + '/validate',
-      { withCredentials: true })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        if(res.data.message === 'success') {
-          console.log(res.data.message);
-          setUser(res.data.user);
-          setMail(res.data.mail);
-        }
-        else console.log(res.data.message);
+      fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
+        method:'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': true,
+        },
+      }).then((res) => {
+        if(res.status === 200) return res.json();
+        throw new Error('Authentication has been failed!');
+      }).then((object) => {
+        setUser(object.user);
+        setMail(object.mail);
       }).catch(err => console.log(err));
     };
     getUser();
-  }, [user]);
+  });
 
   function GoogleAuth() {
     return (
