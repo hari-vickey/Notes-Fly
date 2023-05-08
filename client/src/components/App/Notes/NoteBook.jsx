@@ -21,7 +21,7 @@ export default function NoteBook(props) {
 
   function deleteNote(id) {
     Axios.post(process.env.REACT_APP_NOTE_URL + '/deleteNote',
-    { mail: props.id, item: id })
+    { mail: props.id, note: id })
   }
 
   return (
