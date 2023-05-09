@@ -24,9 +24,9 @@ app.use(session({
     autoRemove: 'interval'
   }),
   cookie: {
-    httpOnly: process.env.NODE_ENV === 'development' ? false : true,
-    sameSite: process.env.NODE_ENV === 'development' ? 'none' : true, // Set if using CORS
-    domain: process.env.NODE_ENV === 'development' ? process.env.DOMAIN_URL : '',
+    httpOnly: process.env.NODE_ENV === 'production' ? false : true,
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : true, // Set if using CORS
+    domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN_URL : '',
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
 }));
