@@ -29,19 +29,13 @@ app.use(session({
     mongoUrl: process.env.MONGO_URI,
     autoRemove: 'interval'
   }),
-  cookie: {
-    httpOnly: process.env.NODE_ENV === 'production' ? false : true,
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : true, // Set if using CORS
-    domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN_URL : '',
-    maxAge: 1000 * 60 * 60 * 24 * 7
-  }
+  cookie: { sameSite: process.env.NODE_ENV === 'production' ? 'none' : false }
 }));
 
 // Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
 
-<<<<<<< HEAD
 // Setup CORS
 app.use(cors({
   origin: process.env.CLIENT_URL,
@@ -53,8 +47,6 @@ if (process.env.NODE_ENV === 'production') {
   app.set('trust proxy', 1);
 }
 
-=======
->>>>>>> parent of ed72563 (Authentication Updated)
 // routes
 const auth = require('./routes/auth');
 const todo = require('./routes/todo');
