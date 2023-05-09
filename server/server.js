@@ -23,7 +23,11 @@ app.use(session({
     mongoUrl: process.env.MONGO_URI,
     autoRemove: 'interval'
   }),
-  cookie: { sameSite: false }
+  cookie: {
+    sameSite: false, httpOnly: false,
+    domain: process.env.DOMAIN_URL,
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
 }));
 
 // Passport Setup
