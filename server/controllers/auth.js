@@ -46,17 +46,20 @@ exports.googleCallback = passport.authenticate('google', {
 };
 
 exports.isAuthenticated = (req, res) => {
+<<<<<<< HEAD
   if(req.isAuthenticated()) {
+=======
+  console.log(req.user);
+  if(req.user) {
+>>>>>>> parent of ed72563 (Authentication Updated)
     res.status(200).json({
-      message: 'success',
-      user: {
-        name: req.user.name.givenName,
-        mail: req.user.emails[0].value
-      }
+      user: req.user.name.givenName,
+      mail: req.user.emails[0].value,
+      message: 'success'
     });
   }
   else {
-    res.status(403).json({ message: 'failure', user: null });
+    res.status(400).json({ message: 'failure' });
   }
 }
 

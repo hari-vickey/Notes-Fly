@@ -2,22 +2,28 @@
 require('dotenv').config();
 
 // Import Required Modules
+const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const session = require('express-session');
 
 // use express instead body-parser
 app.use(express.json({ extended: false }));
 // Add public folder to be accessible
 app.use(express.static('public'));
+// Setup CORS
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  methods: 'GET, POST, PUT, DELETE',
+  credentials: true
+}));
 // Set Parameters for Express Session
 const MongoStore = require('connect-mongo');
 app.use(session({
   secret: process.env.SECRET,
-  resave: false, proxy: true,
+  resave: true, proxy: true,
   saveUninitialized: false,
   store: new MongoStore({
     mongoUrl: process.env.MONGO_URI,
@@ -36,6 +42,10 @@ app.use(cors({
   methods: 'GET, POST, PUT, DELETE',
   credentials: true
 }));
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
 
 // routes
 const auth = require('./routes/auth');
