@@ -12,7 +12,7 @@ export default function App() {
   const getUser = async () => {
     try {
       const url = process.env.REACT_APP_AUTH_URL + '/validate';
-      const {data} = await Axios.get(url, { withCredentials: true});
+      const {data} = await Axios.get(url, { withCredentials: true });
       setUser(data.user.name);
       setMail(data.user.mail);
     } catch (err) { console.log(err); }
