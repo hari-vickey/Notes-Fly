@@ -17,15 +17,16 @@ app.use(express.static('public'));
 const MongoStore = require('connect-mongo');
 app.use(session({
   secret: process.env.SECRET,
-  resave: false, proxy: true,
+  resave: true, proxy: true,
   saveUninitialized: false,
   store: new MongoStore({
     mongoUrl: process.env.MONGO_URI,
     autoRemove: 'interval'
   }),
   cookie: {
-    sameSite: false, httpOnly: false,
-    domain: process.env.DOMAIN_URL,
+    httpOnly: process.env.NODE_ENV === 'development' ? false : true,
+    sameSite: process.env.NODE_ENV === 'development' ? 'none' : true, // Set if using CORS
+    domain: process.env.NODE_ENV === 'development' ? process.env.DOMAIN_URL : '',
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
 }));
@@ -40,6 +41,10 @@ app.use(cors({
   methods: 'GET, POST, PUT, DELETE',
   credentials: true
 }));
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
 
 // routes
 const auth = require('./routes/auth');
