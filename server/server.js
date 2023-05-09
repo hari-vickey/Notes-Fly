@@ -23,7 +23,7 @@ app.use(session({
     mongoUrl: process.env.MONGO_URI,
     autoRemove: 'interval'
   }),
-  cookie: { sameSite: false }
+  cookie: { sameSite: process.env.NODE_ENV === 'production' ? 'none' : false }
 }));
 
 // Passport Setup
