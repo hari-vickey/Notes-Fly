@@ -29,7 +29,7 @@ app.use(session({
     mongoUrl: process.env.MONGO_URI,
     autoRemove: 'interval'
   }),
-  cookie: { sameSite: process.env.NODE_ENV === 'production' ? 'none' : false }
+  cookie: { sameSite: false }
 }));
 
 // Passport Setup
@@ -42,10 +42,6 @@ app.use(cors({
   methods: 'GET, POST, PUT, DELETE',
   credentials: true
 }));
-
-if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1);
-}
 
 // routes
 const auth = require('./routes/auth');
