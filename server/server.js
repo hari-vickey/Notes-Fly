@@ -15,23 +15,34 @@ app.use(express.static('public'));
 // Set Parameters for Express Session
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-app.use(session({
-  secret: process.env.SECRET,
-  resave: true, proxy: true,
-  saveUninitialized: false,
-  store: new MongoStore({
-    mongoUrl: process.env.MONGO_URI,
-    autoRemove: 'interval'
-  }),
-  cookie: { sameSite: false }
-}));
 
 // Setup CORS
 app.use(cors({
   origin: process.env.CLIENT_URL,
-  credentials: true,
   methods: 'GET, POST, PUT, DELETE',
+  credentials: true,
 }));
+
+var Cookies = {
+  secret: process.env.SECRET,
+  resave: true, proxy: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongoUrl: process.env.MONGO_URI,
+    autoRemove: 'interval'
+  }),
+  cookie: {
+    domain: process.env.DOMAIN_URL,
+    httpOnly: false, sameSite: false
+  }
+};
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1)
+  Cookies.cookie.secure = true
+}
+
+app.use(session(Cookies));
 
 // Passport Setup
 app.use(passport.initialize());
