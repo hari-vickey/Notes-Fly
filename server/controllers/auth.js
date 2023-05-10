@@ -11,7 +11,7 @@ passport.use(
     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
   },
   function (accessToken, refreshToken, profile, done) {
-    User.findOne({googleId: profile.id}).then((object) => {
+    User.find({googleId: profile.id}).then((object) => {
       if(!object) {
         const user = new User({
           fName: profile.name.givenName,
@@ -41,9 +41,7 @@ exports.googleOAuth = passport.authenticate('google', {
 exports.googleCallback = passport.authenticate('google', {
   successRedirect: process.env.CLIENT_URL + '/app',
   failureRedirect: process.env.CLIENT_URL + '/error',
-}), (req, res) => {
-  req.session.user = req.user;
-};
+});
 
 exports.isAuthenticated = (req, res) => {
   if(req.isAuthenticated()) {
