@@ -7,9 +7,9 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [mail, setMail] = useState(null);
 
-  const getUser = () => {
+  const getUser = async () => {
     try {
-      fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
+      await fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
         method:'GET', credentials: 'include',
         headers: {
           Accept: 'application/json',
@@ -18,7 +18,7 @@ export default function App() {
         }
       }).then((res) => {
         if(res.status === 200) return res.json();
-        throw new Error("authentication has been failed!");
+        else throw new Error("authentication has been failed!");
       }).then((object) => {
         setUser(object.user.name);
         setMail(object.user.mail);
