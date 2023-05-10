@@ -10,7 +10,7 @@ export default function App() {
   const getUser = async () => {
     try {
       await fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
-        method:'GET', credentials: 'include',
+        method:'GET', credentials: 'include', mode: 'cors',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
