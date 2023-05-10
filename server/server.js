@@ -28,9 +28,8 @@ app.use(session({
 
 // Setup CORS
 app.use(cors({
-  origin: true,
+  origin: true, credentials: true,
   methods: 'GET, POST, PUT, DELETE',
-  credentials: true
 }));
 
 // Passport Setup

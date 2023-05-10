@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Axios from 'axios';
 import Home from './Home/Home';
 import NotesFly from './App/NotesFly';
 
@@ -8,12 +7,22 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [mail, setMail] = useState(null);
 
-  const getUser = async () => {
+  const getUser = () => {
     try {
-      const url = process.env.REACT_APP_AUTH_URL + '/validate';
-      const {data} = await Axios.get(url, { withCredentials: true });
-      setUser(data.user.name);
-      setMail(data.user.mail);
+      fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
+        method:'GET', credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials':true
+        }
+      }).then((res) => {
+        if(res.status === 200) return res.json();
+        throw new Error("authentication has been failed!");
+      }).then((object) => {
+        setUser(object.user.name);
+        setMail(object.user.mail);
+      });
     } catch (err) { console.log(err); }
   }
 
