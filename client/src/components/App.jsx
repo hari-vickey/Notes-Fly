@@ -9,22 +9,28 @@ export default function App() {
 
   const getUser = async () => {
     try {
-      await fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
-        method:'GET', credentials: 'include', mode: 'cors',
+      const response = await fetch(process.env.REACT_APP_AUTH_URL + '/validate', {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Credentials':true
-        }
-      }).then((res) => {
-        if(res.status === 200) return res.json();
-        else throw new Error("authentication has been failed!");
-      }).then((object) => {
-        setUser(object.user.name);
-        setMail(object.user.mail);
+          'Access-Control-Allow-Credentials': true,
+        },
       });
-    } catch (err) { console.log(err); }
-  }
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setUser(data.user?.name || null);
+        setMail(data.user?.mail || null);
+      } else {
+        throw new Error('Authentication has failed!');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     getUser();

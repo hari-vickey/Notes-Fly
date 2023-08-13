@@ -123,6 +123,7 @@ footer {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  min-height: 450px;
   height: 100vh;
   display:flex;
 }

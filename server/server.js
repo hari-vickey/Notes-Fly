@@ -29,7 +29,7 @@ var Cookies = {
   saveUninitialized: true,
   store: new MongoStore({
     mongoUrl: process.env.MONGO_URI,
-    autoRemove: 'interval'
+    autoRemove: 'native'
   }),
   cookie: {
     domain: process.env.DOMAIN_URL,
